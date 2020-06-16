@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recipe_button_dimension">200dp</dimen>
+    <dimen name="recipe_textview_margins">4dp</dimen>
+    <dimen name="recipe_card_radius">8dp</dimen>
+    <dimen name="default_layout_padding">8dp</dimen>
+</resources>

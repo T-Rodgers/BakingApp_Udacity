@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <TextView
+        android:background="@drawable/rounded_border_background"
+        android:id="@+id/recipe_text_view"
+        android:layout_marginTop="@dimen/recipe_textview_margins"
+        android:layout_marginRight="@dimen/recipe_textview_margins"
+        android:layout_marginLeft="@dimen/recipe_textview_margins"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+        tools:text="Sweet Potato Pie"
+        android:padding="@dimen/default_layout_padding"
+        android:gravity="center" />
+</LinearLayout>
+

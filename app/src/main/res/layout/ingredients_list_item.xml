@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/ingredient_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textSize="16sp"
+        tools:text="Nutella or other chocolate-hazelnut spread" />
+
+    <TextView
+        android:id="@+id/quantity_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredient_text_view"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/measurement_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredient_text_view"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@id/quantity_text_view"
+        android:layout_toRightOf="@id/quantity_text_view"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:text="K" />
+</RelativeLayout>
