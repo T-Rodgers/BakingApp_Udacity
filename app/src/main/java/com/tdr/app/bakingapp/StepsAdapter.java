@@ -16,6 +16,17 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
 
     private List<Step> mStepsList;
 
+    private final StepOnClickHandler mClickHandler;
+
+    public interface StepOnClickHandler {
+        void onClick(Step stepData);
+    }
+
+
+    public StepsAdapter(StepOnClickHandler handler) {
+        mClickHandler = handler;
+    }
+
     @NonNull
     @Override
     public StepViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,6 +40,9 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
         Step step = mStepsList.get(position);
 
+        String stepCount = String.valueOf(step.getId() + 1);
+
+        holder.stepCountTextView.setText(stepCount);
         holder.shortDescriptionTextView.setText(step.getShortDescription());
 
     }
@@ -41,14 +55,24 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
         return 0;
     }
 
-    public class StepViewHolder extends RecyclerView.ViewHolder {
+    public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private TextView stepCountTextView;
         private TextView shortDescriptionTextView;
 
         public StepViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            stepCountTextView = itemView.findViewById(R.id.step_count_text_view);
             shortDescriptionTextView = itemView.findViewById(R.id.short_description_text_view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Step step = mStepsList.get(position);
+            mClickHandler.onClick(step);
         }
     }
 

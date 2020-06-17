@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tdr.app.bakingapp.model.Recipe;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.tdr.app.bakingapp.utils.Constants.EXTRA_RECIPE;
 
 public class IngredientsFragment extends Fragment {
@@ -24,12 +28,17 @@ public class IngredientsFragment extends Fragment {
 
     private IngredientsAdapter mAdapter;
     private Recipe recipe;
+    @BindView(R.id.servings_text_view)
+    TextView servingsTextView;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_ingredients, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
+        ButterKnife.bind(this, rootView);
 
         Intent recipeIntent = getActivity().getIntent();
         if (recipeIntent != null) {
@@ -57,6 +66,8 @@ public class IngredientsFragment extends Fragment {
 
 
     public void loadRecipeDataIntoViews() {
+        String servings = String.valueOf(recipe.getServings());
+        servingsTextView.setText(servings);
         mAdapter.setIngredients(recipe.getIngredients());
 
         Log.d(TAG, "loadRecipeDataIntoViews: " + mAdapter.getItemCount());
