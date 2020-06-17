@@ -1,6 +1,5 @@
 package com.tdr.app.bakingapp;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,56 +12,48 @@ import com.tdr.app.bakingapp.model.Step;
 
 import java.util.List;
 
-public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHolder> {
 
     private List<Step> mStepsList;
 
     @NonNull
     @Override
-    public StepsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+    public StepViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.step_list_item, parent, false);
 
-        return new StepsViewHolder(view);
+        return new StepViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StepsViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
         Step step = mStepsList.get(position);
-        holder.descriptionTextView.setText(step.getId());
 
-        Log.d("BindView", "onBindViewHolder: " + step.getShortDescription());
-
-    }
-
-
-
-    public class StepsViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView descriptionTextView;
-
-        public StepsViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            descriptionTextView = itemView.findViewById(R.id.description_text_view);
-        }
+        holder.shortDescriptionTextView.setText(step.getShortDescription());
 
     }
-
 
     @Override
     public int getItemCount() {
         if (mStepsList != null) {
-            mStepsList.size();
+            return mStepsList.size();
         }
         return 0;
     }
 
+    public class StepViewHolder extends RecyclerView.ViewHolder {
 
-    public void setRecipeSteps(List<Step> stepsList) {
-        mStepsList = stepsList;
+        private TextView shortDescriptionTextView;
+
+        public StepViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            shortDescriptionTextView = itemView.findViewById(R.id.short_description_text_view);
+        }
+    }
+
+    public void setRecipeSteps(List<Step> steps) {
+        mStepsList = steps;
         notifyDataSetChanged();
     }
 }

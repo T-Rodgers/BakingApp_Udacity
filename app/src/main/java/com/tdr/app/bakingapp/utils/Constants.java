@@ -15,4 +15,6 @@ public class Constants {
     public static final String INGREDIENT_DESCRIPTION_KEY = "ingredient";
     public static final String MEASUREMENT_KEY = "measure";
     public static final String QUANTITY_KEY = "quantity";
+
+    public static final String EXTRA_RECIPE = "recipe";
 }

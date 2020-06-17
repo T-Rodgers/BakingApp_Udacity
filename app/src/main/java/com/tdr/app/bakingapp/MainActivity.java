@@ -15,6 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.tdr.app.bakingapp.utils.Constants.EXTRA_RECIPE;
+
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler{
 
 
@@ -41,9 +43,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
     @Override
     public void onClick(Recipe recipeData) {
-        Intent recipeDetailsIntent = new Intent(MainActivity.this, IngredientsActivity.class);
-        recipeDetailsIntent.putExtra("Recipe", recipeData);
+        Intent recipeDetailsIntent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
+        recipeDetailsIntent.putExtra(EXTRA_RECIPE, recipeData);
         startActivity(recipeDetailsIntent);
+
 
     }
 

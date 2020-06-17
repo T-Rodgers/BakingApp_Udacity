@@ -56,8 +56,10 @@ public class JSONUtils {
 
                 }
 
-                JSONArray stepsArray = recipeJSONObject.getJSONArray(STEPS_KEY);
+
                 List<Step> steps = new ArrayList<>();
+                JSONArray stepsArray = recipeJSONObject.getJSONArray(STEPS_KEY);
+
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
@@ -66,13 +68,14 @@ public class JSONUtils {
                     String description = step.getString(STEP_DESCRIPTION_KEY);
                     String videoUrl = step.getString(STEP_VIDEO_URL_KEY);
 
-                    Step currentStep = new Step(stepId, shortDescription, description, videoUrl);
+                    Step currentStep = new Step(stepId,shortDescription, description, videoUrl);
                     steps.add(currentStep);
 
                 }
 
                     Recipe recipe = new Recipe(id, name, servings, ingredients, steps);
                     recipes.add(recipe);
+
                 }
 
                 return recipes;

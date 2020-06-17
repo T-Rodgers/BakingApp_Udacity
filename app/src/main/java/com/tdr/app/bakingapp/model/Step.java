@@ -5,44 +5,16 @@ import android.os.Parcelable;
 
 public class Step implements Parcelable {
 
-    private int stepId;
+    private int id;
     private String shortDescription;
     private String description;
     private String videoURL;
 
-    public Step(int stepId, String shortDescription, String description, String videoURL) {
-        this.stepId = stepId;
+    public Step(int id, String shortDescription, String description, String videoURL) {
+        this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
         this.videoURL = videoURL;
-    }
-
-    protected Step(Parcel in) {
-        stepId = in.readInt();
-        shortDescription = in.readString();
-        description = in.readString();
-        videoURL = in.readString();
-    }
-
-    public static final Creator<Step> CREATOR = new Creator<Step>() {
-        @Override
-        public Step createFromParcel(Parcel in) {
-            return new Step(in);
-        }
-
-        @Override
-        public Step[] newArray(int size) {
-            return new Step[size];
-        }
-    };
-
-
-    public int getId() {
-        return stepId;
-    }
-
-    public void setId(int id) {
-        this.stepId = id;
     }
 
     public String getShortDescription() {
@@ -69,6 +41,14 @@ public class Step implements Parcelable {
         this.videoURL = videoURL;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -76,10 +56,29 @@ public class Step implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(stepId);
-        dest.writeString(shortDescription);
-        dest.writeString(description);
-        dest.writeString(videoURL);
+        dest.writeInt(this.id);
+        dest.writeString(this.shortDescription);
+        dest.writeString(this.description);
+        dest.writeString(this.videoURL);
     }
+
+    protected Step(Parcel in) {
+        this.id = in.readInt();
+        this.shortDescription = in.readString();
+        this.description = in.readString();
+        this.videoURL = in.readString();
+    }
+
+    public static final Parcelable.Creator<Step> CREATOR = new Parcelable.Creator<Step>() {
+        @Override
+        public Step createFromParcel(Parcel source) {
+            return new Step(source);
+        }
+
+        @Override
+        public Step[] newArray(int size) {
+            return new Step[size];
+        }
+    };
 
 }
