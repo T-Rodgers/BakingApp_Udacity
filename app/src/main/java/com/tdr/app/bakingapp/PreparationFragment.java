@@ -34,9 +34,6 @@ implements StepsAdapter.StepOnClickHandler {
     private Recipe recipe;
     private List<Step> steps;
 
-    @BindView(R.id.full_description_text_view)
-    TextView fullDescriptionTextView;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,13 +67,11 @@ implements StepsAdapter.StepOnClickHandler {
 
     public void loadData() {
         String fullDescription = recipe.getSteps().get(0).getDescription();
-        fullDescriptionTextView.setText(fullDescription);
         mAdapter.setRecipeSteps(steps);
     }
 
     @Override
     public void onClick(Step stepData) {
-        fullDescriptionTextView.setText(stepData.getDescription());
         Toast.makeText(getContext(), "Step ID: " + stepData.getId(), Toast.LENGTH_SHORT).show();
     }
 }
