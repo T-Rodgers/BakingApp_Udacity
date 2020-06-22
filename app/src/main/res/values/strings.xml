@@ -4,4 +4,5 @@
     <string name="ingredients_label">Ingredients</string>
     <string name="preparation_label">Preparation</string>
     <string name="preparation_steps_label">Step</string>
+    <string name="no_video_message">This step does not contain video</string>
 </resources>

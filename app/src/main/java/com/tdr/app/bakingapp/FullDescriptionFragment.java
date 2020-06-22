@@ -6,6 +6,7 @@ import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.tdr.app.bakingapp.model.Step;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.tdr.app.bakingapp.utils.Constants.EXTRA_STEP;
 
 public class FullDescriptionFragment extends Fragment {
@@ -42,6 +46,11 @@ public class FullDescriptionFragment extends Fragment {
     private MediaSession mMediaSession;
     private PlaybackState.Builder mStateBuilder;
 
+    @BindView(R.id.full_description_text_view)
+    TextView fullDescriptionTextView;
+
+    @BindView(R.id.emptyView)
+    TextView emptyView;
     public FullDescriptionFragment() {
 
     }
@@ -58,15 +67,21 @@ public class FullDescriptionFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_full_step_description, container, false);
 
+        ButterKnife.bind(this, rootView);
+
         mPlayerView = rootView.findViewById(R.id.playerView);
-        TextView fullDescriptionTextView = rootView.findViewById(R.id.full_description_text_view);
 
         String videoUrl = step.getVideoURL();
 
         fullDescriptionTextView.setText(step.getDescription());
 //        initializeMediaSession();
 
+        if (TextUtils.isEmpty(videoUrl)) {
+            emptyView.setVisibility(View.VISIBLE);
+            mPlayerView.setVisibility(View.GONE);
+        } else {
         initializePlayer(Uri.parse(videoUrl));
+        }
 
         return rootView;
     }
@@ -121,10 +136,11 @@ public class FullDescriptionFragment extends Fragment {
     }
 
     private void releasePlayer() {
-        mExoPlayer.stop();
-        mExoPlayer.release();
-        mExoPlayer = null;
-
+        if (mExoPlayer != null) {
+            mExoPlayer.stop();
+            mExoPlayer.release();
+            mExoPlayer = null;
+        }
     }
 
     @Override
