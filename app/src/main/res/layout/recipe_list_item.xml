@@ -11,7 +11,7 @@
         android:layout_marginRight="@dimen/recipe_textview_margins"
         android:layout_marginLeft="@dimen/recipe_textview_margins"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/recipe_card_height"
         android:textColor="@android:color/black"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         tools:text="Sweet Potato Pie"

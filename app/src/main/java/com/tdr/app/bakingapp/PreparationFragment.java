@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +17,12 @@ import com.tdr.app.bakingapp.model.Recipe;
 import com.tdr.app.bakingapp.model.Step;
 
 import java.util.List;
+import java.util.Objects;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.tdr.app.bakingapp.utils.Constants.EXTRA_RECIPE;
+import static com.tdr.app.bakingapp.utils.Constants.EXTRA_STEP;
 
 public class PreparationFragment extends Fragment
 implements StepsAdapter.StepOnClickHandler {
@@ -31,7 +30,6 @@ implements StepsAdapter.StepOnClickHandler {
     private static final String TAG = PreparationFragment.class.getSimpleName();
 
     private StepsAdapter mAdapter;
-    private Recipe recipe;
     private List<Step> steps;
 
     @Nullable
@@ -41,8 +39,8 @@ implements StepsAdapter.StepOnClickHandler {
         View rootView = inflater.inflate(R.layout.fragment_preparation, container, false);
         ButterKnife.bind(this, rootView);
 
-        Intent recipeIntent = getActivity().getIntent();
-        recipe = recipeIntent.getParcelableExtra(EXTRA_RECIPE);
+        Intent recipeIntent = Objects.requireNonNull(getActivity()).getIntent();
+        Recipe recipe = recipeIntent.getParcelableExtra(EXTRA_RECIPE);
         if (recipe != null) {
             steps = recipe.getSteps();
         }
@@ -66,12 +64,14 @@ implements StepsAdapter.StepOnClickHandler {
     }
 
     public void loadData() {
-        String fullDescription = recipe.getSteps().get(0).getDescription();
         mAdapter.setRecipeSteps(steps);
     }
 
     @Override
     public void onClick(Step stepData) {
-        Toast.makeText(getContext(), "Step ID: " + stepData.getId(), Toast.LENGTH_SHORT).show();
+        Intent fullDescriptionIntent = new Intent(getContext(), PreparationInstructionsActivity.class);
+        fullDescriptionIntent.putExtra(EXTRA_STEP, stepData);
+        startActivity(fullDescriptionIntent);
     }
+
 }

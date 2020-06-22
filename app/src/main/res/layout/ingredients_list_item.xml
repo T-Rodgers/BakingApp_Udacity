@@ -9,8 +9,7 @@
         android:id="@+id/ingredient_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         tools:text="Nutella or other chocolate-hazelnut spread" />
 
     <TextView
@@ -18,8 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ingredient_text_view"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textSize="14sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="italic"
         tools:text="1" />
 
@@ -32,8 +30,7 @@
         android:layout_marginLeft="4dp"
         android:layout_toEndOf="@id/quantity_text_view"
         android:layout_toRightOf="@id/quantity_text_view"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textSize="14sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="italic"
         tools:text="K" />
 </RelativeLayout>

@@ -17,4 +17,5 @@ public class Constants {
     public static final String QUANTITY_KEY = "quantity";
 
     public static final String EXTRA_RECIPE = "recipe";
+    public static final String EXTRA_STEP = "step";
 }

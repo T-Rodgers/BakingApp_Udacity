@@ -6,6 +6,11 @@
     android:layout_height="wrap_content"
     tools:context=".PreparationFragment">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/steps_recycler_view"
             android:layout_width="match_parent"
@@ -19,6 +24,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
 </ScrollView>
 
