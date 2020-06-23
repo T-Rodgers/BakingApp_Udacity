@@ -1,4 +1,4 @@
-package com.tdr.app.bakingapp;
+package com.tdr.app.bakingapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tdr.app.bakingapp.PreparationInstructionsActivity;
+import com.tdr.app.bakingapp.R;
+import com.tdr.app.bakingapp.StepsAdapter;
 import com.tdr.app.bakingapp.model.Recipe;
 import com.tdr.app.bakingapp.model.Step;
 

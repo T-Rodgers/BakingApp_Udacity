@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.tdr.app.bakingapp.fragments.IngredientsFragment;
+import com.tdr.app.bakingapp.fragments.PreparationFragment;
+
 public class DetailAdapter extends FragmentPagerAdapter {
 
     private Context mContext;

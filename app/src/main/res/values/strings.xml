@@ -5,4 +5,7 @@
     <string name="preparation_label">Preparation</string>
     <string name="preparation_steps_label">Step</string>
     <string name="no_video_message">This step does not contain video</string>
+    <string name="set_as_widget_menu_title">Set As Widget</string>
+    <string name="add_widget">Add Widget</string>
+    <string name="appwidget_text">EXAMPLE</string>
 </resources>

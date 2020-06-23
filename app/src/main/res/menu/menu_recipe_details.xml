@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_set_as"
+        android:icon="@android:drawable/ic_menu_set_as"
+        app:showAsAction="always"
+        android:title="@string/set_as_widget_menu_title">
+        <menu>
+
+            <item android:id="@+id/action_add_to_widget"
+                android:title="@string/add_widget"/>
+        </menu>
+
+    </item>
+
+</menu>

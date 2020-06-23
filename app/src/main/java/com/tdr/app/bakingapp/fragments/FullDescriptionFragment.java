@@ -1,10 +1,7 @@
-package com.tdr.app.bakingapp;
+package com.tdr.app.bakingapp.fragments;
 
 import android.content.Intent;
-import android.media.session.MediaSession;
-import android.media.session.PlaybackState;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -29,6 +25,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.tdr.app.bakingapp.R;
 import com.tdr.app.bakingapp.model.Step;
 
 import butterknife.BindView;
@@ -43,8 +40,8 @@ public class FullDescriptionFragment extends Fragment {
     private Step step;
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mPlayerView;
-    private MediaSession mMediaSession;
-    private PlaybackState.Builder mStateBuilder;
+    private String videoUrl;
+    private String fullDescription;
 
     @BindView(R.id.full_description_text_view)
     TextView fullDescriptionTextView;
@@ -60,21 +57,22 @@ public class FullDescriptionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        Intent stepData = getActivity().getIntent();
-        if (stepData != null) {
-            step = stepData.getParcelableExtra(EXTRA_STEP);
-        }
-
         View rootView = inflater.inflate(R.layout.fragment_full_step_description, container, false);
 
         ButterKnife.bind(this, rootView);
 
         mPlayerView = rootView.findViewById(R.id.playerView);
 
-        String videoUrl = step.getVideoURL();
+        Intent stepData = getActivity().getIntent();
+        if (stepData != null) {
+            step = stepData.getParcelableExtra(EXTRA_STEP);
+        }
 
-        fullDescriptionTextView.setText(step.getDescription());
-//        initializeMediaSession();
+        if (step != null) {
+            videoUrl = step.getVideoURL();
+            fullDescription = step.getDescription();
+        }
+        fullDescriptionTextView.setText(fullDescription);
 
         if (TextUtils.isEmpty(videoUrl)) {
             emptyView.setVisibility(View.VISIBLE);
@@ -85,38 +83,7 @@ public class FullDescriptionFragment extends Fragment {
 
         return rootView;
     }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void initializeMediaSession() {
 
-        // Create a MediaSessionCompat.
-        mMediaSession = new MediaSession(getContext(), TAG);
-
-        // Enable callbacks from MediaButtons and TransportControls.
-        mMediaSession.setFlags(
-                MediaSession.FLAG_HANDLES_MEDIA_BUTTONS |
-                        MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-
-        // Do not let MediaButtons restart the player when the app is not visible.
-        mMediaSession.setMediaButtonReceiver(null);
-
-        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player.
-        mStateBuilder = new PlaybackState.Builder()
-                .setActions(
-                        PlaybackState.ACTION_PLAY |
-                                PlaybackState.ACTION_PAUSE |
-                                PlaybackState.ACTION_SKIP_TO_PREVIOUS |
-                                PlaybackState.ACTION_PLAY_PAUSE);
-
-        mMediaSession.setPlaybackState(mStateBuilder.build());
-
-
-        // MySessionCallback has methods that handle callbacks from a media controller.
-        mMediaSession.setCallback(new RecipeMediaSessionCallback());
-
-        // Start the Media Session since the activity is active.
-        mMediaSession.setActive(true);
-
-    }
 
     private void initializePlayer(Uri mediaUri) {
         if (mExoPlayer == null) {
@@ -132,7 +99,6 @@ public class FullDescriptionFragment extends Fragment {
             mExoPlayer.setPlayWhenReady(true);
 
         }
-
     }
 
     private void releasePlayer() {
@@ -148,23 +114,4 @@ public class FullDescriptionFragment extends Fragment {
         super.onDestroy();
         releasePlayer();
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private class RecipeMediaSessionCallback extends MediaSession.Callback {
-        @Override
-        public void onPlay() {
-            mExoPlayer.setPlayWhenReady(true);
-        }
-
-        @Override
-        public void onPause() {
-            mExoPlayer.setPlayWhenReady(false);
-        }
-
-        @Override
-        public void onSkipToPrevious() {
-            mExoPlayer.seekTo(0);
-        }
-    }
-
 }

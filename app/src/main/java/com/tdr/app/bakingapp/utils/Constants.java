@@ -18,4 +18,6 @@ public class Constants {
 
     public static final String EXTRA_RECIPE = "recipe";
     public static final String EXTRA_STEP = "step";
+
+    public static final String PREFERENCES_ID = "preference_id";
 }
